@@ -15,6 +15,7 @@ for num in range(201):
     num = random.randrange(1, 201)
     array.append(num)
 
+
 def GenerateArray():
     c.delete("all")
     position = 0
@@ -27,22 +28,29 @@ def GenerateArray():
         position += 4
     #c.create_line(150, 1, 150, 200)
 
-def SelectionSort(arr):
-    # GenerateArray()
-    while (notSorted):
-        for i in range(200):
-            if (array[i] > array[i + 1]):
-                notSorted = False
+
+def SelectionSort():
+    global pos
+    while (True):
+        test_array = array[:]
+        test_array.sort()
+        if (test_array == array):
+            break
+
+        smallest_index = findSmallest(array[pos:]) + pos
+
+        smallest = array[smallest_index]
+
+        array.pop(smallest_index)
+
+        array.insert(pos, smallest)
+
+        pos += 1
+        print(array)
+        repaint(array)
+        time.sleep(0.05)
 
 
-    smallest_index = findSmallest()
-    smallest = arr[smallest_index]
-    arr.pop(smallest_index)
-    arr.insert(pos, smallest)
-    addOne(pos)
-
-def addOne(x):
-    x+1
 
 
 def findSmallest(arr):
@@ -53,6 +61,7 @@ def findSmallest(arr):
             smallest = arr[i]
             smallest_index = i
     return smallest_index
+
 
 def repaint(array):
     c.delete("all")
@@ -65,7 +74,7 @@ def repaint(array):
 generate_b = Button(root, text="Generate new array", command=GenerateArray)
 generate_b.grid(row=3, column=0)
 
-selectionSort_b = Button(root, text="Selection Sort", command=SelectionSort(array))
+selectionSort_b = Button(root, text="Selection Sort", command=SelectionSort)
 selectionSort_b.grid(row=3, column=1)
 
 # d = {}
@@ -78,12 +87,5 @@ selectionSort_b.grid(row=3, column=1)
 
 
 
-while(notSorted):
-    for i in range(200):
-        if (array[i] > array[i + 1]):
-            notSorted = False
-
-
 
 root.mainloop()
-
