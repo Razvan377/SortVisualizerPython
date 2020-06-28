@@ -19,7 +19,10 @@ for num in range(201):
 def GenerateArray():
     c.delete("all")
     position = 0
+    global array
     array = []
+    global pos
+    pos = 0
     for num in range(200):
         num = random.randrange(1,200)
         array.append(num)
