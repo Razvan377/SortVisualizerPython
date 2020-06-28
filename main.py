@@ -49,6 +49,7 @@ def SelectionSort():
         print(array)
         repaint(array)
         time.sleep(0.05)
+        # ok
 
 
 
