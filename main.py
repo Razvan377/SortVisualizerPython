@@ -34,11 +34,12 @@ def GenerateArray():
 
 def SelectionSort():
     global pos
-    while (True):
+    global notSorted
+    while (notSorted):
         test_array = array[:]
         test_array.sort()
         if (test_array == array):
-            break
+            notSorted = False
 
         smallest_index = findSmallest(array[pos:]) + pos
 
@@ -49,7 +50,7 @@ def SelectionSort():
         array.insert(pos, smallest)
 
         pos += 1
-        repaint(array)
+        repaint(array, smallest, notSorted)
         c.update_idletasks()
         print(array)
         time.sleep(0.05)
@@ -65,12 +66,20 @@ def findSmallest(arr):
     return smallest_index
 
 
-def repaint(array):
+def repaint(array, smallest, listSorted):
     c.delete("all")
     position = 0
-    for num in array:
-        c.create_line(150+position,1,150+position,num*3)
-        position += 4
+    if(listSorted != True):
+        for num in array:
+            c.create_line(150 + position, 1, 150 + position, num * 3, fill='green')
+            position += 4
+    else:
+        for num in array:
+            if(num == smallest):
+                c.create_line(150 + position, 1, 150 + position, num * 3, fill='red')
+            else:
+                c.create_line(150+position,1,150+position,num*3)
+            position += 4
 
 
 generate_b = Button(root, text="Generate new array", command=GenerateArray)
