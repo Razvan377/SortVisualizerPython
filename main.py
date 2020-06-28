@@ -22,6 +22,8 @@ def GenerateArray():
     global array
     array = []
     global pos
+    global notSorted
+    notSorted = True
     pos = 0
     for num in range(200):
         num = random.randrange(1,200)
@@ -56,6 +58,81 @@ def SelectionSort():
         time.sleep(0.05)
 
 
+def BubbleSort():
+    global notSorted
+    n = len(array)
+    for i in range(n-1):
+        for j in range(0, n-i-1):
+            if(array[j] > array[j+1]):
+                array[j], array[j+1] = array[j+1], array[j]
+                print(array)
+                test_array = array[:]
+                test_array.sort()
+                if (test_array == array):
+                    notSorted = False
+                bubbleRepaint(array, notSorted, array[j], array[j+1])
+                c.update_idletasks()
+
+
+# def MergeSort():
+#     global notSorted
+#     global array
+#     if len(array) >1:
+#         m = len(array)//2
+#         left = array[:m]
+#         right = array[m:]
+#         left = mergesort1(left)
+#         right = mergesort1(right)
+#
+#         array =[]
+#
+#         while len(left) > 0 and len(right) > 0:
+#             if left[0] < right[0]:
+#                 array.append(left[0])
+#                 left.pop(0)
+#                 mergepaint(array)
+#                 c.update_idletasks()
+#
+#             else:
+#                 array.append(right[0])
+#                 right.pop(0)
+#                 mergepaint(array)
+#                 c.update_idletasks()
+#
+#
+#         for i in left:
+#             array.append(i)
+#         for i in right:
+#             array.append(i)
+#
+#         print(array)
+#
+# def mergesort1(array):
+#     if len(array) > 1:
+#         m = len(array) // 2
+#         left = array[:m]
+#         right = array[m:]
+#         left = mergesort1(left)
+#         right = mergesort1(right)
+#
+#         array = []
+#
+#         while len(left) > 0 and len(right) > 0:
+#             if left[0] < right[0]:
+#                 array.append(left[0])
+#                 left.pop(0)
+#             else:
+#                 array.append(right[0])
+#                 right.pop(0)
+#
+#         for i in left:
+#             array.append(i)
+#         for i in right:
+#             array.append(i)
+#
+#     return array
+
+
 def findSmallest(arr):
     smallest = arr[0]
     smallest_index = 0
@@ -82,11 +159,40 @@ def repaint(array, smallest, listSorted):
             position += 4
 
 
+def bubbleRepaint(array, listSorted, n1, n2):
+    c.delete("all")
+    position = 0
+    if (listSorted != True):
+        for num in array:
+            c.create_line(150 + position, 1, 150 + position, num * 3, fill='green')
+            position += 4
+    else:
+        for num in array:
+            if (num == n1 or num == n2):
+                c.create_line(150 + position, 1, 150 + position, num * 3, fill='red')
+            else:
+                c.create_line(150 + position, 1, 150 + position, num * 3)
+            position += 4
+
+# def mergepaint(array):
+#     c.delete("all")
+#     position = 0
+#     for num in array:
+#         c.create_line(150 + position, 1, 150 + position, num * 3)
+#         position += 4
+
+
 generate_b = Button(root, text="Generate new array", command=GenerateArray)
 generate_b.grid(row=3, column=0)
 
 selectionSort_b = Button(root, text="Selection Sort", command=SelectionSort)
 selectionSort_b.grid(row=3, column=1)
+
+# mergeSort_b = Button(root, text="Merge Sort", command=MergeSort)
+# mergeSort_b.grid(row=3, column=2)
+
+bubbleSort_b = Button(root, text="Bubble Sort", command=BubbleSort)
+bubbleSort_b.grid(row=3, column=2)
 
 
 root.mainloop()
