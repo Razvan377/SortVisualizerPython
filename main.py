@@ -74,6 +74,26 @@ def BubbleSort():
                 c.update_idletasks()
 
 
+def InsertionSort():
+    global notSorted
+    for i in range(1, len(array)):
+        key = array[i]
+        j = i-1
+
+        while(j >= 0 and key < array[j]):
+            array[j+1] = array[j]
+            j -= 1
+        array[j+1] = key
+        print(array)
+        test_array = array[:]
+        test_array.sort()
+        if (test_array == array):
+            notSorted = False
+        bubbleRepaint(array, notSorted, array[j+1], array[j + 2])
+        c.update_idletasks()
+        time.sleep(0.05)
+
+
 # def MergeSort():
 #     global notSorted
 #     global array
@@ -194,5 +214,7 @@ selectionSort_b.grid(row=3, column=1)
 bubbleSort_b = Button(root, text="Bubble Sort", command=BubbleSort)
 bubbleSort_b.grid(row=3, column=2)
 
+insertionSort_b = Button(root, text="Insertion Sort", command=InsertionSort)
+insertionSort_b.grid(row=3, column=3)
 
 root.mainloop()
