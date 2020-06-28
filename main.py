@@ -46,12 +46,10 @@ def SelectionSort():
         array.insert(pos, smallest)
 
         pos += 1
-        print(array)
         repaint(array)
+        c.update_idletasks()
+        print(array)
         time.sleep(0.05)
-        # ok
-
-
 
 
 def findSmallest(arr):
@@ -77,16 +75,6 @@ generate_b.grid(row=3, column=0)
 
 selectionSort_b = Button(root, text="Selection Sort", command=SelectionSort)
 selectionSort_b.grid(row=3, column=1)
-
-# d = {}
-#
-# for x in range(10):
-#     d[f"string{x}"] = "Hi"
-#
-# print(d["string5"])
-
-
-
 
 
 root.mainloop()
